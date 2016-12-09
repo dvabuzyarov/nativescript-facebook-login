@@ -56,8 +56,10 @@ export function registerCallback(successCallback: any, cancelCallback: any, fail
 
       }));
 
+      var previousResult = act.onActivityResult;
       //Overriding Activity onActivityResult method to send it to the callbackManager
       act.onActivityResult = (requestCode: number, resultCode: number, data: android.content.Intent) => {
+        act.onActivityResult = previousResult;
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
       }
     }
